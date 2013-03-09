@@ -108,5 +108,61 @@ suite('flexigin', function () {
         done();
       });
     });
+
+    test('returns text/html as content-type when html is requested.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/html', function (res) {
+        assert.that(res.headers['content-type'], is.equalTo('text/html'));
+        done();
+      });
+    });
+
+    test('returns text/css as content-type when css is requested.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/css', function (res) {
+        assert.that(res.headers['content-type'], is.equalTo('text/css'));
+        done();
+      });
+    });
+
+    test('returns text/javascript as content-type when js is requested.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/js', function (res) {
+        assert.that(res.headers['content-type'], is.equalTo('text/javascript'));
+        done();
+      });
+    });
+
+    test('returns data if there is a single file.', function (done) {
+      http.get('http://localhost:3000/components/user/html', function (res) {
+        res.on('data', function (data) {
+          assert.that(data.toString('utf8'), is.equalTo(
+            '<!doctype html>\n' +
+            '<html>\n' +
+            '  <head>\n' +
+            '    <title>flexigin</title>\n' +
+            '  </head>\n' +
+            '  <body>\n' +
+            '    flexigin\n' +
+            '  </body>\n' +
+            '</html>'
+          ));
+          done();
+        });
+      });
+    });
+
+    test('returns concatenated data if there are multiple files.', function (done) {
+      http.get('http://localhost:3000/components/user/css', function (res) {
+        res.on('data', function (data) {
+          assert.that(data.toString('utf8'), is.equalTo(
+            '* {\n' +
+            '  margin: 0;\n' +
+            '}\n' +
+            'div {\n' +
+            '  margin: 7px;\n' +
+            '}'
+          ));
+          done();
+        });
+      });
+    });
   });
 });

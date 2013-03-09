@@ -5,6 +5,7 @@
   "author": "Golo Roden <golo.roden@thenativeweb.io> (http://www.thenativeweb.io)",
   "main": "lib/flexigin.js",
   "dependencies": {
+    "async": "0.2.6",
     "underscore": "1.4.4"
   },
   "devDependencies": {
