@@ -1,6 +1,6 @@
 # flexigin-node
 
-flexigin-node is a Connect / Express middleware to serve flexigin requests.
+flexigin-node is a Connect / Express middleware to serve [flexigin](https://github.com/robbz/flexigin) requests.
 
 If you have any questions or feedback, feel free to contact me using [@goloroden](https://twitter.com/goloroden) on Twitter.
 
