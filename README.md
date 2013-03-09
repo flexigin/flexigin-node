@@ -34,9 +34,7 @@ The `basePath` defines the directory where flexigin-node looks for components.
 
 The client requests the `html` data for the `user/profile` component.
 
-Hence a request is being sent to `/components/user/profile/html`. flexigin-node takes care of this request and looks inside the directory `__dirname/components/user/profile` for any files with the `.html` extension.
-
-Then it concatenates these files and returns them to the client.
+Hence a request is being sent to `/components/user/profile/html`. flexigin-node takes care of this request and looks inside the directory `__dirname/components/user/profile` for any files with the `.html` extension. It concatenates these files and returns them to the client.
 
 ## Running the tests
 
