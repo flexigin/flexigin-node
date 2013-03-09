@@ -151,8 +151,12 @@ suite('flexigin', function () {
 
     test('returns concatenated data if there are multiple files.', function (done) {
       http.get('http://localhost:3000/components/user/css', function (res) {
+        var result = '';
         res.on('data', function (data) {
-          assert.that(data.toString('utf8'), is.equalTo(
+          result += data;
+        });
+        res.on('end', function () {
+          assert.that(result.toString('utf8'), is.equalTo(
             '* {\n' +
             '  margin: 0;\n' +
             '}' +
