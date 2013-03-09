@@ -26,6 +26,16 @@ Using flexigin-node is easy. All you need to do is to add a reference to it with
 
     http.createServer(app).listen(3000);
 
+The `baseUrl` setting defines the prefix for urls that shall be handled by flexigin-node. Please note that this url must start with a `/`, but must neither contain placeholders nor a trailing slash.
+
+The `basePath` defines the directory where flexigin-node looks for components.
+
+### Example
+
+The client requests the `html` data for the `user/profile` component. Hence a request is being sent to `/components/user/profile/html`. flexigin-node takes care of this request and looks inside the directory `__dirname/components/user/profile` for any files with the `.html` extension.
+
+Then it concatenates these files and returns them to the client.
+
 ## Running the tests
 
 flexigin-node has been developed using TDD. To run the tests, go to the folder where you have installed flexigin-node to and run `npm test`. You need to have [mocha](https://github.com/visionmedia/mocha) installed.
