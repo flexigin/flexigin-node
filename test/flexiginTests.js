@@ -67,8 +67,43 @@ suite('flexigin', function () {
       });
     });
 
-    test('returns the content when html is requested.', function (done) {
+    test('returns a 200 when html is requested.', function (done) {
       http.get('http://localhost:3000/components/user/html', function (res) {
+        assert.that(res.statusCode, is.equalTo(200));
+        done();
+      });
+    });
+
+    test('returns a 200 when css is requested.', function (done) {
+      http.get('http://localhost:3000/components/user/css', function (res) {
+        assert.that(res.statusCode, is.equalTo(200));
+        done();
+      });
+    });
+
+    test('returns a 200 when js is requested.', function (done) {
+      http.get('http://localhost:3000/components/user/js', function (res) {
+        assert.that(res.statusCode, is.equalTo(200));
+        done();
+      });
+    });
+
+    test('returns a 200 when html is requested for a nested component.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/html', function (res) {
+        assert.that(res.statusCode, is.equalTo(200));
+        done();
+      });
+    });
+
+    test('returns a 200 when css is requested for a nested component.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/css', function (res) {
+        assert.that(res.statusCode, is.equalTo(200));
+        done();
+      });
+    });
+
+    test('returns a 200 when js is requested for a nested component.', function (done) {
+      http.get('http://localhost:3000/components/user/profile/js', function (res) {
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
