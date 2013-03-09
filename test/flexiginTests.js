@@ -155,7 +155,7 @@ suite('flexigin', function () {
           assert.that(data.toString('utf8'), is.equalTo(
             '* {\n' +
             '  margin: 0;\n' +
-            '}\n' +
+            '}' +
             'div {\n' +
             '  margin: 7px;\n' +
             '}'
