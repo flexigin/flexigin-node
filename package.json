@@ -1,7 +1,7 @@
 {
-  "name": "flexigin",
+  "name": "flexigin-node",
   "version": "0.0.1",
-  "description": "The best project ever.",
+  "description": "flexigin-node is a Connect / Express middleware to serve flexigin requests.",
   "author": "Golo Roden <golo.roden@thenativeweb.io> (http://www.thenativeweb.io)",
   "main": "lib/flexigin.js",
   "dependencies": {
