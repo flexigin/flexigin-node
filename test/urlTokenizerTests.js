@@ -43,7 +43,7 @@ suite('urlTokenizer', function () {
   });
 
   test('/basePath/user/profile/html/ => user/profile + html', function (done) {
-    urlTokenizer('/basePath/user/profile/html', function (err, result) {
+    urlTokenizer('/basePath/user/profile/html/', function (err, result) {
       assert.that(result.component, is.equalTo('user/profile'));
       assert.that(result.type, is.equalTo('html'));
       done();
@@ -67,7 +67,7 @@ suite('urlTokenizer', function () {
   });
 
   test('/basePath/user/profile/html/?foo => user/profile + html', function (done) {
-    urlTokenizer('/basePath/user/profile/html?foo', function (err, result) {
+    urlTokenizer('/basePath/user/profile/html/?foo', function (err, result) {
       assert.that(result.component, is.equalTo('user/profile'));
       assert.that(result.type, is.equalTo('html'));
       done();
