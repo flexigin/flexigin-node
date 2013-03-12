@@ -55,6 +55,7 @@ suite('flexigin', function () {
 
     test('returns a 404 when a non-existent component is requested.', function (done) {
       http.get('http://localhost:3000/components/profile', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(404));
         done();
       });
@@ -62,6 +63,7 @@ suite('flexigin', function () {
 
     test('returns a 404 when an invalid type is requested.', function (done) {
       http.get('http://localhost:3000/components/user/img', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(404));
         done();
       });
@@ -69,6 +71,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when html is requested.', function (done) {
       http.get('http://localhost:3000/components/user/html', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -76,6 +79,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when css is requested.', function (done) {
       http.get('http://localhost:3000/components/user/css', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -83,6 +87,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when js is requested.', function (done) {
       http.get('http://localhost:3000/components/user/js', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -90,6 +95,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when html is requested for a nested component.', function (done) {
       http.get('http://localhost:3000/components/user/profile/html', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -97,6 +103,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when css is requested for a nested component.', function (done) {
       http.get('http://localhost:3000/components/user/profile/css', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -104,6 +111,7 @@ suite('flexigin', function () {
 
     test('returns a 200 when js is requested for a nested component.', function (done) {
       http.get('http://localhost:3000/components/user/profile/js', function (res) {
+        res.resume();
         assert.that(res.statusCode, is.equalTo(200));
         done();
       });
@@ -111,6 +119,7 @@ suite('flexigin', function () {
 
     test('returns text/html as content-type when html is requested.', function (done) {
       http.get('http://localhost:3000/components/user/profile/html', function (res) {
+        res.resume();
         assert.that(res.headers['content-type'], is.equalTo('text/html'));
         done();
       });
@@ -118,6 +127,7 @@ suite('flexigin', function () {
 
     test('returns text/css as content-type when css is requested.', function (done) {
       http.get('http://localhost:3000/components/user/profile/css', function (res) {
+        res.resume();
         assert.that(res.headers['content-type'], is.equalTo('text/css'));
         done();
       });
@@ -125,6 +135,7 @@ suite('flexigin', function () {
 
     test('returns text/javascript as content-type when js is requested.', function (done) {
       http.get('http://localhost:3000/components/user/profile/js', function (res) {
+        res.resume();
         assert.that(res.headers['content-type'], is.equalTo('text/javascript'));
         done();
       });
@@ -132,8 +143,12 @@ suite('flexigin', function () {
 
     test('returns data if there is a single file.', function (done) {
       http.get('http://localhost:3000/components/user/html', function (res) {
-        res.on('data', function (data) {
-          assert.that(data.toString('utf8'), is.equalTo(
+        var data = '';
+        res.on('readable', function () {
+          data += res.read().toString('utf8');
+        });
+        res.on('end', function () {
+          assert.that(data, is.equalTo(
             '<!doctype html>\n' +
             '<html>\n' +
             '  <head>\n' +
@@ -151,12 +166,12 @@ suite('flexigin', function () {
 
     test('returns concatenated data if there are multiple files.', function (done) {
       http.get('http://localhost:3000/components/user/css', function (res) {
-        var result = '';
-        res.on('data', function (data) {
-          result += data;
+        var data = '';
+        res.on('readable', function () {
+          data += res.read().toString('utf8');
         });
         res.on('end', function () {
-          assert.that(result.toString('utf8'), is.equalTo(
+          assert.that(data, is.equalTo(
             '* {\n' +
             '  margin: 0;\n' +
             '}' +

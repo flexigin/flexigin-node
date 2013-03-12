@@ -6,6 +6,7 @@
   "main": "lib/flexigin.js",
   "dependencies": {
     "async": "0.2.6",
+    "string": "1.2.1",
     "underscore": "1.4.4"
   },
   "devDependencies": {
